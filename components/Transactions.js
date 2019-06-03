@@ -38,7 +38,7 @@ function Example(props) {
     // Declare a new state variable
     const [userName, setUserName] = useState('');
     const [paymentMode, setPaymentMode] = useState(0);
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState();
 
 
       useEffect( () => {
@@ -78,9 +78,12 @@ function Example(props) {
               }
             </div>
             <div className="submitButton">
+              <div>
               <input type="number" min="1" max="5000" value = {amount} className="inputValue" onChange={(e) => {
                 setAmount(e.target.value)}
               }/>
+              <p>some</p>
+              </div>
               <button type="submit" value="Transfer"  className="transferButton">Transfer</button>
               </div>
             </form>
@@ -94,7 +97,7 @@ function Example(props) {
   padding: 21px;
         }
         .formButton {
-          width: 33%;
+          width: 25%;
           display: inline-block;
         }
         button {
@@ -108,7 +111,7 @@ function Example(props) {
           display: inline-block;
           position: absolute;
           right: 18%;
-          top: 15%;
+          top: 8%;
         }
         .inputValue {
           height: 25px;
@@ -120,6 +123,8 @@ function Example(props) {
           background: #0076ff;
           color: #ffff;
           float: right;
+          position: relative;
+          bottom: 7vw;
         }
         
       `}</style>

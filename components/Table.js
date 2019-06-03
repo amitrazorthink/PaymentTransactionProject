@@ -1,13 +1,7 @@
 import React from 'react';
-import Loader from './Loader';
 
 function Table(props) {
-  console.log('props in Table', props);
   const tableData = props.data;
-  console.log('tableDta', tableData);
-  // console.log('tableDta', tableData.length);
-
-
   const tData = (tableData && tableData.length) ?
     tableData.map(i => {
       return(
@@ -93,9 +87,8 @@ table{
           padding: 21px;
           margin-top: 15px;
         }
-
-     
-             `}</style>
+             `}
+             </style>
            </div>
   
       )
@@ -103,37 +96,3 @@ table{
 
 export default Table;
 
-// table, th, td {
-//   border: 1px solid #7a7a7a;
-//   border-collapse: collapse;
-//   background: #ccc;
-//   font-weight: normal;
-//   font-family: sans-serif;
-//   font-size: 12px;
-//   width: 100%;
-// }
-//  th {
-//   border-bottom: 2px solid #010101;
-//  }
-//  tbody {
-//   overflow-x: auto;
-//  }
-// th, td {
-//   padding: 5px;
-//   text-align: center;
-//   width: 25%;
-// }
-//   .rowClass{
-//  border: 1px solid #000 !important;
-//  padding: 5px;
-//  text-align: center;
-// }
-
-// .tableDiv {
-//   background: #d9d8d9;
-//   margin: auto;
-//   width: 75%;
-//   padding: 21px;
-//   margin-top: 15px;
-//   height: 9em;
-// }
