@@ -1,29 +1,19 @@
 import React, {Component} from 'react';
 import { Line } from 'react-chartjs-2';
+import selectExamplePage from "../selector";
+import  {getTransaction}  from '../actions';
+import { connect } from 'react-redux';
 
 
-export default class Chart extends Component {
+
+export class Chart extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-          transData: null,
-        };
-      }      
-      fetchTransaction = () => {
-        this.setState({...this.state, isFetching: true})
-        fetch('http://localhost:3000/rest/transactions')
-          .then(response => response.json())
-          .then(result => this.setState({transData: result, 
-                                         isFetching: false}))
-          .catch(e => console.log(e));
-      }   
+      }        
       componentDidMount() {
-        this.fetchTransaction()
+        this.props.dispatch(getTransaction())
       }
  render() {
-    const {
-        transData
-      } = this.state;
     const data = {
         labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16','17', '18', '19', '20', '21', '22', '23', '24', '25'],
         datasets: [
@@ -37,7 +27,7 @@ export default class Chart extends Component {
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            data:(transData && transData.filter(i => i.paymentMode === "DBS PayLa").map(i => i.amount)) 
+            data:(this.props.transactions && this.props.transactions.filter(i => i.paymentMode === "DBS PayLa").map(i => i.amount)) 
           },
           {
             label: 'VISA',
@@ -49,7 +39,7 @@ export default class Chart extends Component {
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            data:(transData && transData.filter(i => i.paymentMode === "VISA").map(i => i.amount)) 
+            data:(this.props.transactions && this.props.transactions.filter(i => i.paymentMode === "VISA").map(i => i.amount)) 
           },
           {
               label: 'American Express',
@@ -61,7 +51,7 @@ export default class Chart extends Component {
               borderDash: [],
               borderDashOffset: 0.0,
               borderJoinStyle: 'miter',
-              data:(transData && transData.filter(i => i.paymentMode === "American Express").map(i => i.amount)) 
+              data:(this.props.transactions && this.props.transactions.filter(i => i.paymentMode === "American Express").map(i => i.amount)) 
             }
         ]
       };
@@ -69,8 +59,7 @@ export default class Chart extends Component {
       <div className="chartRow">
         <h2>Transactions Graph</h2>
         <Line ref="chart" data={data}/>
-        <style jsx>{`
-           
+        <style jsx>{`           
         .chartRow {
             background: #d9d8d9;
             margin: auto;
@@ -84,3 +73,6 @@ export default class Chart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, props) => selectExamplePage(state, props);
+export default connect(mapStateToProps)(Chart);
